@@ -204,6 +204,7 @@ class APS:
             return self._baseline
         except AttributeError:
             print(f'Automatic find baseline between (1,5) for {self.name}')
+            # print(f'Automatic find baseline between (0,20) for {self.name}')
             self.find_baseline(plot=False)
             return self._baseline
         
@@ -236,9 +237,12 @@ class APS:
     def find_baseline(self,baseline_bounds=(1,5),plot=True):
         baseline_res=shgo(lambda x: -APS.mofun(x,0.3,self.pes_raw),
                           [baseline_bounds],iters=2)
-        if baseline_res.x in baseline_bounds:
-            raise ValueError(f'Found baseline is on the boundary ({baseline_res.x[0]}). '\
-                             'Please rerun with better baseline_bounds.')
+        # ====================
+        # Check what this means
+        # ====================
+        # if baseline_res.x in baseline_bounds:
+        #     raise ValueError(f'Found baseline is on the boundary ({baseline_res.x[0]}). '\
+        #                       'Please rerun with better baseline_bounds.')
         self._baseline=baseline_res.x[0]
         if plot==True:
             plt.figure()

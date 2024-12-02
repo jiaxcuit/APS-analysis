@@ -26,38 +26,49 @@ import matplotlib.pyplot as plt, tkinter as tk, tkinter.filedialog
 from os.path import normpath,split
 from os import getenv
 from apsmodule import APS
-APSdir=normpath(getenv('OneDrive')+'\\Data\\APS') if getenv('OneDrive')!=None \
-    else ''
+# APSdir=normpath(getenv('OneDrive')+'\\Data\\APS') if getenv('OneDrive')!=None \
+#     else ''
+
+# %%
+APSdir='/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS'
 
 #%% clean apsfiles
 apsfiles=[]
 
 #%% choose files
-root=tk.Tk()
-# root.withdraw()
-# root.iconify()
-# root.call('wm', 'attributes', '.', '-topmost', True)
-apsfiles+=tk.filedialog.askopenfilenames(parent=root,initialdir=APSdir, 
-                                          title='Please select APS files',
-                                          filetypes=[('DAT','.DAT'),('','*.*')])
-root.destroy()
+# root=tk.Tk()
+# # root.withdraw()
+# # root.iconify()
+# # root.call('wm', 'attributes', '.', '-topmost', True)
+# apsfiles+=tk.filedialog.askopenfilenames(parent=root,initialdir=APSdir, 
+#                                           title='Please select APS files',
+#                                           filetypes=[('DAT','*.DAT'),('','*.*')])
+# root.destroy()
+
+# %%
+
+apsfiles = [
+    '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_12_m4_pro.dat',
+            '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_13_m1_pro.dat',
+            '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_20_m1_pro.dat']
 
 #%% load files into apsdata
 plt.close('all')
 apsdata=[]
-apsdata+=APS.import_from_files(apsfiles,sqrt=False,trunc=-8)
+apsdata+=APS.import_from_files(apsfiles,sqrt=True,trunc=-4)
 
 #%% analyze apsdata
 plt.close('all')
 for i in apsdata:
-    i.analyze(5,20)
+    i.analyze(0,20)
     
 #%% overlay all the apsdata
 fig=plt.figure('APS overlay')
 for i in apsdata: i.plot()
     
 #%% Saving APS and APS fit and HOMO with error
-location=split(apsfiles[0])[0]
+location='/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/APS results'
+# location=split(apsfiles[0])[0]
 # APS.save_aps_csv(apsdata,location,filename='Mo2TiC2 sqrt APS')
 # APS.save_aps_fit_csv(apsdata,location,filename='Mo2TiC2 sqrt APS_fit')
 # APS.save_homo_error_csv(apsdata,location,filename='Mo2TiC2 sqrt APS_HOMO')

@@ -58,6 +58,13 @@ root.iconify()
 ref_dwf_file=[tk.filedialog.askopenfilename(parent=root,initialdir=location, title='Please select ref dwf files',filetypes=[('DAT','.DAT')])]
 root.destroy()
 
+# %% 
+# ref_dwf_file = ['/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_dark_CPD_12_m3.Dat']
+
+ # ['/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_dark_CPD_12_m3.Dat',
+ #             '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_dark_CPD_13_m1.Dat',
+ #             '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_dark_CPD_20_m1.Dat']
+
 #%% Load ref APS and ref dwf
 [ref_APS]=APS.import_from_files(ref_APS_file,sqrt=True)
 [ref_dwf]=dwf.import_from_files(ref_dwf_file)
