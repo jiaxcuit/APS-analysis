@@ -26,6 +26,7 @@ import matplotlib.pyplot as plt, tkinter as tk, tkinter.filedialog
 from os.path import normpath,split
 from os import getenv
 from apsmodule import APS
+import os
 # APSdir=normpath(getenv('OneDrive')+'\\Data\\APS') if getenv('OneDrive')!=None \
 #     else ''
 
@@ -47,15 +48,25 @@ apsfiles=[]
 
 # %%
 
-apsfiles = [
-    '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_12_m4_pro.dat',
-            '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_13_m1_pro.dat',
-            '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_20_m1_pro.dat']
+#apsfiles = [
+    #'/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_12_m4_pro.dat',
+            #'/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_13_m1_pro.dat',
+            #'/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_APS_20_m1_pro.dat']
 
+folder_path="C:\\Users\\horga\\OneDrive - Imperial College London\\MSci Project - Shared\\241112 APS\\P3HT_APS\\"
+apsfiles = []
+    
+# Loop through all files in the folder
+for filename in os.listdir(folder_path):
+    # Check if the file ends with the given suffix
+    if filename.endswith('pro.dat'):
+        apsfiles.append(folder_path+filename)
+
+print(apsfiles)
 #%% load files into apsdata
 plt.close('all')
 apsdata=[]
-apsdata+=APS.import_from_files(apsfiles,sqrt=True,trunc=-4)
+apsdata+=APS.import_from_files(apsfiles,sqrt=False,trunc=-4)
 
 #%% analyze apsdata
 plt.close('all')
@@ -67,7 +78,8 @@ fig=plt.figure('APS overlay')
 for i in apsdata: i.plot()
     
 #%% Saving APS and APS fit and HOMO with error
-location='/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/APS results'
+#location='/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/APS results'
+location="C:\\Users\\horga\\OneDrive - Imperial College London\\MSci Project - Shared\\APS results"
 # location=split(apsfiles[0])[0]
 # APS.save_aps_csv(apsdata,location,filename='Mo2TiC2 sqrt APS')
 # APS.save_aps_fit_csv(apsdata,location,filename='Mo2TiC2 sqrt APS_fit')

@@ -65,20 +65,22 @@ root.destroy()
  #             '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_dark_CPD_13_m1.Dat',
  #             '/Users/liujiaxin/Library/CloudStorage/OneDrive-ImperialCollegeLondon/AYear 4/MSci Project/MSci Project - Shared/Jiaxin and Emma/Data/241112 APS/Ag_ref_dark_CPD_20_m1.Dat']
 
+
+ref_dwf_file=["C:/Users//horga//OneDrive - Imperial College London//MSci Project - Shared//241112 APS//1_P3HT_58k_neat_CB_dark_CPD_12_m1.Dat"]
 #%% Load ref APS and ref dwf
-[ref_APS]=APS.import_from_files(ref_APS_file,sqrt=True)
+#[ref_APS]=APS.import_from_files(ref_APS_file,sqrt=True)
 [ref_dwf]=dwf.import_from_files(ref_dwf_file)
 
 #%% Analyze ref_APS and dwf_stat ref_dwf
-ref_APS.analyze(fit_lower_bound=5,fit_upper_bound=50,points=10,
-                plot=True)
+#ref_APS.analyze(fit_lower_bound=5,fit_upper_bound=50,points=10,
+               #plot=True)
 ref_dwf.dwf_stat(length=200)
 
 #%% Load calibration object
-cal=calibrate(ref_APS,ref_dwf)
+#cal=calibrate(ref_APS,ref_dwf)
 
 #%% Calibrate dwf cpddata
-cal.cal(cpddata)
+#cal.cal(cpddata)
 
 #%% Calculate statistic cpddata
 for i in cpddata:  i.dwf_stat(length=200)
