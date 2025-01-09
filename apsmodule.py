@@ -323,6 +323,7 @@ class APS:
             x,y=self.energy[i:j],self.pes_base[i:j]
             fit=np.polyfit(x,y,1)
             x_intcp=-fit[1]/fit[0]
+            gradient=fit[0]
             sig_square=((np.polyval(fit,x)-y)**2).sum()/(j-i-2)
             X=np.concatenate(([x-x_intcp],[np.repeat(-fit[0],j-i)]),0)
             [[_,_],[_,var_homo]]=np.linalg.inv(X.dot(X.T))*sig_square
@@ -331,6 +332,7 @@ class APS:
                 self.lin_start_index,self.lin_stop_index=i,j
                 self.lin_par,self.std_homo=fit,std_homo
                 self.homo=x_intcp
+                self.slope=gradient
         if self.std_homo==np.inf:
             plt.figure()
             self.plot(f"{self.name} fitting fail!!!")
@@ -346,6 +348,12 @@ class APS:
                      bbox={'facecolor': 'yellow', 'alpha': 0.5},
                      horizontalalignment='center',verticalalignment='center',
                      transform=ax.transAxes)
+            plt.text(.5, .5, f'slope={gradient:.2f}'
+                     , style='italic',
+                     bbox={'facecolor': 'yellow', 'alpha': 0.5},
+                     horizontalalignment='center',verticalalignment='center',
+                     transform=ax.transAxes)
+            
             ax.legend().remove()
         if self.lin_stop_index-self.lin_start_index==points:
             print(self.name+' is using the minimum number of points\t')
